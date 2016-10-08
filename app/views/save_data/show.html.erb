@@ -5,7 +5,7 @@
      <br>Member ID: <%= @record['member_id'] %> 
      <br>Datetime: <%= @record['datetime'] %>  
     <%= button_to "Delete", {:controller => 'save_data', :datetime => @record['datetime'], :member_id => @record['member_id']}, :method => :post %>
-       
+    <%= link_to "Edit", edit_data_path(:datetime => @record['datetime'], :member_id => @record['member_id']) %>
   </p>  
 <% end %>
 

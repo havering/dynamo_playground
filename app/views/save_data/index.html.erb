@@ -3,7 +3,7 @@
    <div class="col-md-4">
      <div class="form_main">
        <h4 class="heading"><strong>Quick </strong> Contact <span></span></h4>
-       <div class="form">
+       <div class="form" style="float:left">
          <%= form_tag('save', method: "post", html: {class: "contactFrn"}) do %>
            <input type="text" required="" placeholder="Please input your Name" value="" name="name" class="txt">
            <input type="text" required="" placeholder="Please input your mobile No" value="" name="mob" class="txt">
@@ -15,13 +15,14 @@
      </div>
    </div>
  </div>
+  <div id="comments">
+  <h2>Comments</h2>
+  <% if @info %>
+    <% @info.each do |i| %> 
+      <p><%= link_to "#{i['message']}", display_path(i['datetime'], :member_id => i['member_id']) %> - <%= i['name'] %></p>
+        <%= button_to "Delete", { :controller => 'save_data', :datetime => i['datetime'], :member_id => i['member_id']}, :method => :post %>   
+          <% end %>
+
+  <% end %>
+  </div>
 </div>
-
-<h2>Comments</h2>
-<% if @info %>
-  <% @info.each do |i| %> 
-    <p><%= link_to "#{i['message']}", display_path(i['datetime'], :member_id => i['member_id']) %> - <%= i['name'] %></p>
-      <%= button_to "Delete", { :controller => 'save_data', :datetime => i['datetime'], :member_id => i['member_id']}, :method => :post %>   
-      <% end %>
-
-<% end %>

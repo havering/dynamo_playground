@@ -5,16 +5,16 @@ class SaveDataController < ApplicationController
   end
 
   def save
-    name  = params['name']
-    mob   = params['mob']
+    name = params['name']
+    mob = params['mob']
     email = params['email']
-    mess  = params['mess']
+    mess = params['mess']
     aws_params = Hash.new
     aws_params[:mob] = mob
-    aws_params[:custom_fields]    = {
-        'name'    => name,
-        'email'   => email,
-        'message' => mess,
+    aws_params[:custom_fields] = {
+      'name' => name,
+      'email' => email,
+      'message' => mess,
     }
     if Aws.save_records_to_db(aws_params)
       flash[:notice] = "Message Sent!"
@@ -33,8 +33,12 @@ class SaveDataController < ApplicationController
     redirect_to save_data_index_path
   end
 
-  def update
+  def edit
+    dt = params['datetime']
+    mid = params['member_id'].to_i
 
+    @item = Aws.list_item(dt, mid)
+    puts "@item is #{@item.inspect}"
   end
 
   def show
