@@ -28,7 +28,6 @@ module Aws
                                              'message' => fields['message'],
                                              'email' => fields['email']
                                       }})
-    puts "response from put_itme is #{response.inspect}"
   end
 
   def self.get_records_from_db
@@ -65,12 +64,38 @@ module Aws
     my_table = all_tables.table_names.first
 
     response = @@dynamo_db.get_item({
-          table_name: my_table,
-          key: {
-            'member_id' => member_id,
-            'datetime' => datetime
-          }
-        })
+                                      table_name: my_table,
+                                      key: {
+                                        'member_id' => member_id,
+                                        'datetime' => datetime
+                                      }
+                                    })
     response.item
+  end
+
+  def self.update_item(mess, name, email, datetime, member_id)
+    all_tables = @@dynamo_db.list_tables
+    my_table = all_tables.table_names.first
+
+    response = @@dynamo_db.update_item({
+                                         table_name: my_table, # required
+                                         key: {
+                                           'member_id' => member_id,
+                                           'datetime' => datetime
+                                         },
+                                         attribute_updates: {
+                                           "message" => {
+                                             value: mess,
+                                             action: "PUT",
+                                           },
+                                           "name" => {
+                                             value: name,
+                                             action: "PUT",
+                                           },
+                                           "email" => {
+                                             value: email, # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+                                             action: "PUT", # accepts ADD, PUT, DELETE
+                                           }
+                                         }})
   end
 end

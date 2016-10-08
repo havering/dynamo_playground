@@ -5,6 +5,7 @@
     <!--<input type="text" required="" value="" name="mob" class="txt"> &lt;!&ndash; there's no phone number in db?? &ndash;&gt;-->
     <input type="text" required="" value="<%= @item['email'] %>" name="email" class="txt">
     <input type="text" value="<%= @item['message'] %>" name="mess" type="text" class="txt_3"></input>
+    <input type="hidden" value="<%= @item['member_id'] %>" name="mid">
     <input type="submit" value="submit" name="submit" class="txt2">
   <% end %>
 </div>

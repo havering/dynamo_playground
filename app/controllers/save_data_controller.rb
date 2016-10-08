@@ -38,7 +38,16 @@ class SaveDataController < ApplicationController
     mid = params['member_id'].to_i
 
     @item = Aws.list_item(dt, mid)
-    puts "@item is #{@item.inspect}"
+  end
+
+  def update
+    mess = params['mess']
+    name = params['name']
+    email = params['email']
+    dt = params['datetime']
+    mid = params['mid'].to_i
+
+    Aws.update_item(mess, name, email, dt, mid)
   end
 
   def show
