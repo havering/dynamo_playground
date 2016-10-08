@@ -17,14 +17,11 @@
  </div>
 </div>
 
-<h2>Records Info</h2>
+<h2>Comments</h2>
 <% if @info %>
   <% @info.each do |i| %> 
-    <p>Name: <%= i['name'] %> 
-      <br>Comment: <%= i['message'] %> 
-       <br>Member ID: <%= i['member_id'] %> 
-       <br>Datetime: <%= i['datetime'] %>  
+    <p><%= link_to "#{i['message']}", display_path(i['datetime'], :member_id => i['member_id']) %> - <%= i['name'] %></p>
       <%= button_to "Delete", { :controller => 'save_data', :datetime => i['datetime'], :member_id => i['member_id']}, :method => :post %>   
-    </p>  <% end %>
+      <% end %>
 
 <% end %>

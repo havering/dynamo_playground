@@ -38,7 +38,11 @@ class SaveDataController < ApplicationController
   end
 
   def show
-    dt = params[:datetime]
+    dt = params['datetime']
+    mid = params['member_id'].to_i
+
+    @record = Aws.list_item(dt, mid)
+    puts "@record is #{@record.inspect}"
   end
 
 end

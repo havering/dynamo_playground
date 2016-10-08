@@ -1,11 +1,12 @@
 <h2>Records Info</h2>
 <% if @record %>
-  <% @record.each do |i| %> 
-    <p>Name: <%= i['name'] %> 
-      <br>Comment: <%= i['message'] %> 
-       <br>Member ID: <%= i['member_id'] %> 
-       <br>Datetime: <%= i['datetime'] %>  
-      <%= button_to "Delete", { :controller => 'save_data', :datetime => i['datetime'], :member_id => i['member_id']}, :method => :post %>   
-    </p>  <% end %>
-
+  <p>Name: <%= @record['name'] %> 
+    <br>Comment: <%= @record['message'] %> 
+     <br>Member ID: <%= @record['member_id'] %> 
+     <br>Datetime: <%= @record['datetime'] %>  
+    <%= button_to "Delete", {:controller => 'save_data', :datetime => @record['datetime'], :member_id => @record['member_id']}, :method => :post %>
+       
+  </p>  
 <% end %>
+
+<%= link_to "Back", save_data_index_path %>
