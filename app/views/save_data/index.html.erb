@@ -1,0 +1,30 @@
+<div class="container">
+ <div class="row">
+   <div class="col-md-4">
+     <div class="form_main">
+       <h4 class="heading"><strong>Quick </strong> Contact <span></span></h4>
+       <div class="form">
+         <%= form_tag('save', method: "post", html: {class: "contactFrn"}) do %>
+           <input type="text" required="" placeholder="Please input your Name" value="" name="name" class="txt">
+           <input type="text" required="" placeholder="Please input your mobile No" value="" name="mob" class="txt">
+           <input type="text" required="" placeholder="Please input your Email" value="" name="email" class="txt">
+           <textarea placeholder="Your Message" name="mess" type="text" class="txt_3"></textarea>
+           <input type="submit" value="submit" name="submit" class="txt2">
+         <% end %>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+
+<h2>Records Info</h2>
+<% if @info %>
+  <% @info.each do |i| %> 
+    <p>Name: <%= i['name'] %> 
+      <br>Comment: <%= i['message'] %> 
+       <br>Member ID: <%= i['member_id'] %> 
+       <br>Datetime: <%= i['datetime'] %>  
+      <%= button_to "Delete", { :controller => 'save_data', :datetime => i['datetime'], :member_id => i['member_id']}, :method => :post %>   
+    </p>  <% end %>
+
+<% end %>
