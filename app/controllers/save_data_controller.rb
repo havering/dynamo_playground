@@ -48,6 +48,7 @@ class SaveDataController < ApplicationController
     mid = params['mid'].to_i
 
     Aws.update_item(mess, name, email, dt, mid)
+    redirect_to save_data_index_path
   end
 
   def show
